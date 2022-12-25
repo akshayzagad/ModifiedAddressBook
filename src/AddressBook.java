@@ -82,4 +82,34 @@ public class AddressBook {
             }
         }
     }
+    public void choice() {
+
+        Scanner scanner = new Scanner(System.in);
+        int opration;
+        do {
+            System.out.println("1. ADD CONTACT \n2. DISPLAY CONTACT \n3 EDIT \n4 Delete \n5. EXIT ");
+            System.out.println("Enter the Operation Number");
+            opration = scanner.nextInt();
+            switch (opration) {
+                case 1:
+                    addContact();
+                    break;
+                case 2:
+                    System.out.println(this);
+                    break;
+                case 3:
+                    editContact();
+                    break;
+                case 4:
+                    deleteContact();
+                    break;
+                case 5:
+                    System.out.println("Exiting");
+                    break;
+                default:
+                    System.out.println("Enter The Wrong Opration Number");
+            }
+        } while (opration != 5);
+    }
+
 }
