@@ -21,6 +21,9 @@ public class AddressBookMain {
                     familyBook.editContact();
                     break;
                 case 4:
+                    familyBook.deleteContact();
+                    break;
+                case 5:
                     System.out.println("Exiting");
                     break;
                 default:
