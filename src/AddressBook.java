@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class AddressBook {
     ArrayList<Contact> contactList = new ArrayList<>();
@@ -8,19 +7,25 @@ public class AddressBook {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the details of contact person");
         System.out.print("Enter first name:");
-        contactPerson.setName(sc.next());
-        System.out.print("Enter Last name:");
-        contactPerson.setLastName(sc.next());
-        System.out.println("Enter the Address : ");
-        contactPerson.setAddress(sc.next());
-        System.out.println("Enter the City : ");
-        contactPerson.setCity(sc.next());
-        System.out.println("Enter the State : ");
-        contactPerson.setState(sc.next());
-        System.out.println("Enter the ZipCode : ");
-        contactPerson.setZipCode(sc.next());
-        System.out.println("Enter the Mobile no : ");
-        contactPerson.setPhoneNo(sc.next());
+        String name=sc.next();
+       if (isDuplicate(name)==true){
+           System.out.println("This Name Already Existing");
+       }else {
+           contactPerson.setName(name);
+           System.out.print("Enter Last name:");
+           contactPerson.setLastName(sc.next());
+           System.out.println("Enter the Address : ");
+           contactPerson.setAddress(sc.next());
+           System.out.println("Enter the City : ");
+           contactPerson.setCity(sc.next());
+           System.out.println("Enter the State : ");
+           contactPerson.setState(sc.next());
+           System.out.println("Enter the ZipCode : ");
+           contactPerson.setZipCode(sc.next());
+           System.out.println("Enter the Mobile no : ");
+           contactPerson.setPhoneNo(sc.next());
+           contactList.add(contactPerson);
+       }
     }
     @Override
     public String toString() {
@@ -111,5 +116,20 @@ public class AddressBook {
             }
         } while (opration != 5);
     }
-
+    /*
+     * This method is used to check the duplicate entry
+     * if first and last name already exists in addressbook then it will not return true i.e. duplicate entry
+     * if duplicate return true else return false
+     * */
+    public boolean isDuplicate(String name){
+        return contactList.stream().anyMatch(contact ->contact.getName().equals(name) );
+    }
+    public static void sortByName(HashMap<String, AddressBook> addressBookHashMap) {
+        List<Contact> list = new ArrayList<>();
+        for (Map.Entry<String, AddressBook> entries : addressBookHashMap.entrySet()) {
+            list =entries.getValue().contactList;
+            list.stream().sorted((p1, p2) -> ((String)p1.getName()).compareTo(p2.getName()))
+                    .forEach(contact -> System.out.println(contact));
+        }
+    }
 }

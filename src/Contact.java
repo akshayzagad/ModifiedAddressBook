@@ -10,15 +10,15 @@ public class Contact {
     public Contact() {
     }
 
-    public Contact(String name, String lastName, String address, String city, String state, String phoneNo, String zipCode) {
-        this.name = name;
-        this.lastName = lastName;
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.phoneNo = phoneNo;
-        this.zipCode = zipCode;
-    }
+//    public Contact(String name, String lastName, String address, String city, String state, String phoneNo, String zipCode) {
+//        this.name = name;
+//        this.lastName = lastName;
+//        this.address = address;
+//        this.city = city;
+//        this.state = state;
+//        this.phoneNo = phoneNo;
+//        this.zipCode = zipCode;
+//    }
 
     public String getName() {
         return name;
