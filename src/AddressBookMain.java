@@ -1,16 +1,17 @@
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class AddressBookMain {
     static HashMap<String, AddressBook> addressBookMap = new HashMap<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("WelCome To AddressBook Program");
         Scanner scanner = new Scanner(System.in);
         int operation;
         System.out.println("WelCome To AddressBook Program");
         do {
-            System.out.println("1. ADD Addressbook \n2. Perform Operations into AddressBook \n3 Display all address book \n4 searchAddressBooksDetails \n5   ");
+            System.out.println("1. ADD Addressbook \n2. Perform Operations into AddressBook \n3 Display all address book \n4 searchAddressBooksDetails \n5 WriteInFile \n6 ReadFile \n7 Exit");
             System.out.println("Enter the Operation Number");
             operation = scanner.nextInt();
             scanner.nextLine();
@@ -45,7 +46,6 @@ public class AddressBookMain {
                         System.out.println("8.Sort contact details by city");
                         System.out.println("9.Sort contact details by  zip code");
                         System.out.println("10.Exit");
-                        System.out.println();
                         System.out.print("Enter option : ");
                         Scanner input = new Scanner(System.in);
                         option = input.nextInt();
@@ -81,36 +81,36 @@ public class AddressBookMain {
                                 break;
                             case 5:
                                 System.out.println("Enter Person State name to count person : ");
-                                String countName = input.next();
+                                String stateNameCount = input.next();//array={10,12}
+                                //string refrance:array
                                 for (AddressBook list : addressBookMap.values()) {
-                                    Long countPerson = list.contactList.stream().filter(person -> person.getState().equalsIgnoreCase(countName)).count();
+                                    Long countPerson = list.contactList.stream().filter(person -> person.getState().equalsIgnoreCase(stateNameCount)).count();
                                     System.out.println(countPerson);
                                 }
                                 break;
-
                             case 6:
-                                List<Contact> personList ;
+                                List<Contact> personList;
                                 for (AddressBook list : addressBookMap.values()) {
-                                    personList = list.contactList.stream().sorted(Comparator.comparing(Contact::getName)).collect(Collectors.toList());
+                                    personList = list.contactList.stream().sorted((a, b) -> a.getName().compareTo(b.getName())).collect(Collectors.toList());
                                     System.out.println(personList);
                                 }
                                 break;
                             case 7:
-                                List<Contact> personList1 ;
+//                               List<Contact> personList1 ;
                                 for (AddressBook list : addressBookMap.values()) {
-                                    personList1 = list.contactList.stream().sorted(Comparator.comparing(Contact::getState)).collect(Collectors.toList());
-                                    System.out.println(personList1);
+                                    list.contactList.stream().sorted((a, b) -> a.getState().compareTo(b.getState())).forEach(x -> System.out.println(x));
+//                                    System.out.println(personList1);
                                 }
                                 break;
                             case 8:
-                                List<Contact> personList2 ;
+                                List<Contact> personList2;
                                 for (AddressBook list : addressBookMap.values()) {
                                     personList2 = list.contactList.stream().sorted(Comparator.comparing(Contact::getCity)).collect(Collectors.toList());
                                     System.out.println(personList2);
                                 }
                                 break;
                             case 9:
-                                List<Contact> personList3 ;
+                                List<Contact> personList3;
                                 for (AddressBook list : addressBookMap.values()) {
                                     personList3 = list.contactList.stream().sorted(Comparator.comparing(Contact::getZipCode)).collect(Collectors.toList());
                                     System.out.println(personList3);
@@ -121,14 +121,23 @@ public class AddressBookMain {
                             default:
                                 System.out.println("Enter The Wrong Opration Number");
                         }
-                    } while (option!=10);
+                    } while (option != 10);
                 case 5:
-                    System.out.println("Exiting");
+                    String txtPath = "E:\\bridzlabz\\Java\\AdvanceAddressbook\\src\\AddressbookContacts.txt";
+                    AddressBook.writeFile(addressBookMap, txtPath);
                     break;
+                case 6:
+                    String txtPath1 = "E:\\bridzlabz\\Java\\AdvanceAddressbook\\src\\AddressbookContacts.txt";
+                    AddressBook book=new AddressBook();
+                    book.readFile(txtPath1);
+                    break;
+                case 7:
+                    System.out.println("Exiting");
                 default:
                     System.out.println("Enter The Wrong Opration Number");
             }
-        } while (operation != 5);
+        } while (operation != 7);
         System.out.println();
+
     }
 }

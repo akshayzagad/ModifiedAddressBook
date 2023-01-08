@@ -1,0 +1,2 @@
+School -> AddressBook{contactList=[Contact{name='Hemant', lastName='Kengeri', address='Subhashnagar', city='Pune', state='Maharatra', phoneNo='7895546', zipCode='411006'}]}
+Class -> AddressBook{contactList=[Contact{name='Govardhan', lastName='Reddy', address='Thiorupti', city='Thirupathi', state='Andra', phoneNo='54862323', zipCode='456223'}]}
